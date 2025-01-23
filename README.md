@@ -6,7 +6,7 @@
       <!-- Hexagon -->
       <path d="M21 16.5v-9L12 3L3 7.5v9L12 21l9-4.5z" stroke="#60A5FA" stroke-width="1.5" fill="none"/>
       <!-- Command symbol -->
-      <path d="M15 7v3a3 3 0 1 0 3 3h-3m-6 0H6a3 3 0 1 1 3-3V7m0 10v-3a3 3 0 1 0-3-3h3m6 0h3a3 3 0 1 1-3 3v3" stroke="white" stroke-width="2" fill="none"/>
+      <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
   <h3>A Modern Web Operating System Experience</h3>
