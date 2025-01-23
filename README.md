@@ -96,9 +96,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Inspired by modern operating systems
 - Built with love and lots of ☕
 
-## 📸 Screenshots
-
-[Consider adding some screenshots of your application here]
 
 ---
 
