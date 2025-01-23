@@ -8,6 +8,10 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	interface Window {
+		changeWallpaper: (path: string) => void;
+	}
 }
 
 export {};

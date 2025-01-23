@@ -4,6 +4,7 @@
 	import { cubicOut } from 'svelte/easing';
 	import { Command, Hexagon } from 'lucide-svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { currentWallpaper } from '$lib/stores/wallpaper';
 
 	let loading = 0;
 	let showLogo = false;
@@ -11,6 +12,9 @@
 	const dispatch = createEventDispatcher();
 
 	onMount(() => {
+		// Ensure blue theme is set on boot
+		currentWallpaper.set('/images/wallpaper.jpeg');
+
 		// Show logo first
 		setTimeout(() => {
 			showLogo = true;

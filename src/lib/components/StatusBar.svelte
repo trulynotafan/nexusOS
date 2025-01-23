@@ -19,6 +19,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { translations } from '$lib/stores/translations';
 	import { hasMaximizedWindow, windows } from '$lib/stores/windows';
+	import { currentTheme } from '$lib/stores/theme';
 
 	let showNexusInfo = false;
 	let showWifiMenu = false;
@@ -212,252 +213,254 @@
 </script>
 
 {#if !$hasMaximizedWindow}
-<div class="fixed top-0 z-50 flex h-7 w-full items-center justify-between bg-slate-900/70 px-4 backdrop-blur supports-[backdrop-filter]:bg-slate-900/40">
-	<div class="relative" use:clickOutside on:outclick={handleClickOutside}>
-		<button
-			class="flex items-center gap-2 text-sm font-medium text-white hover:opacity-80"
-			on:click={toggleNexusInfo}
-		>
-			<div class="relative flex items-center">
-				<Hexagon class="h-5 w-5 text-blue-400" strokeWidth={1.5} />
-				<Command 
-					class="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 text-white" 
-					strokeWidth={2.5}
-				/>
-			</div>
-			<span class="font-semibold tracking-wide">Nexus</span>
-		</button>
-
-		{#if showNexusInfo}
-			<div
-				class="absolute left-0 top-7 w-96 rounded-lg border border-slate-700/50 bg-slate-900/95 p-4 shadow-lg backdrop-blur"
-				transition:scale={{ duration: 300, start: 0.95, opacity: 0, easing: elasticOut }}
+<div class="fixed top-0 left-0 right-0 z-50 h-7 {$currentTheme.secondary} backdrop-blur supports-[backdrop-filter]:bg-slate-900/40 border-b {$currentTheme.border}">
+	<div class="flex h-7 w-full items-center justify-between bg-slate-900/70 px-4">
+		<div class="relative" use:clickOutside on:outclick={handleClickOutside}>
+			<button
+				class="flex items-center gap-2 text-sm font-medium text-white hover:opacity-80"
+				on:click={toggleNexusInfo}
 			>
-				<div class="flex flex-col gap-4">
-					<!-- Logo and Title Section -->
-					<div class="flex items-start gap-3">
-						<div class="mt-1 rounded-lg bg-blue-500/10 p-2">
-							<Code2 class="h-5 w-5 text-blue-400" />
-						</div>
-						<div class="space-y-1">
-							<h3 class="font-semibold tracking-wide text-white">Nexus</h3>
-							<p class="text-sm font-medium text-white/90">
-								A web operating system
-								<span 
-									class="inline-block" 
-									in:fly={{ y: 5, duration: 300, delay: 200 }}
-								>
-									made with ❤️
-								</span>
-								<span 
-									class="inline-block" 
-									in:fly={{ y: 5, duration: 300, delay: 400 }}
-								>
-									by
-								</span>
-								<span 
-									class="inline-block font-medium text-white" 
-									in:fly={{ y: 5, duration: 300, delay: 600 }}
-								>
-									Afaan
-								</span>
-							</p>
-						</div>
-					</div>
+				<div class="relative flex items-center">
+					<Hexagon class="h-5 w-5 text-blue-400" strokeWidth={1.5} />
+					<Command 
+						class="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 text-white" 
+						strokeWidth={2.5}
+					/>
+				</div>
+				<span class="font-semibold tracking-wide">Nexus</span>
+			</button>
 
-					<!-- Technologies Section -->
-					<div 
-						class="space-y-2"
-						in:fly={{ y: 10, duration: 300, delay: 700 }}
-					>
-						<h4 class="text-xs font-medium uppercase tracking-wider text-white/50">Built with</h4>
-						<div class="grid grid-cols-2 gap-2">
-							{#each technologies as tech, i}
-								<div 
-									class="flex items-center gap-2 rounded bg-slate-800/50 p-2"
-									in:fly={{ 
-										x: i % 2 === 0 ? -10 : 10, 
-										y: 10,
-										duration: 300, 
-										delay: 800 + (i * 100) 
-									}}
-								>
-									<div class="rounded bg-slate-800/50 p-1.5">
-										<svelte:component 
-											this={tech.icon} 
-											class="h-4 w-4 {tech.color}" 
-										/>
-									</div>
-									<span class="text-sm font-medium text-white">
-										{tech.name}
+			{#if showNexusInfo}
+				<div
+					class="absolute left-0 top-7 w-96 rounded-lg border border-slate-700/50 bg-slate-900/95 p-4 shadow-lg backdrop-blur"
+					transition:scale={{ duration: 300, start: 0.95, opacity: 0, easing: elasticOut }}
+				>
+					<div class="flex flex-col gap-4">
+						<!-- Logo and Title Section -->
+						<div class="flex items-start gap-3">
+							<div class="mt-1 rounded-lg bg-blue-500/10 p-2">
+								<Code2 class="h-5 w-5 text-blue-400" />
+							</div>
+							<div class="space-y-1">
+								<h3 class="font-semibold tracking-wide text-white">Nexus</h3>
+								<p class="text-sm font-medium text-white/90">
+									A web operating system
+									<span 
+										class="inline-block" 
+										in:fly={{ y: 5, duration: 300, delay: 200 }}
+									>
+										made with ❤️
 									</span>
-								</div>
-							{/each}
+									<span 
+										class="inline-block" 
+										in:fly={{ y: 5, duration: 300, delay: 400 }}
+									>
+										by
+									</span>
+									<span 
+										class="inline-block font-medium text-white" 
+										in:fly={{ y: 5, duration: 300, delay: 600 }}
+									>
+										Afaan
+									</span>
+								</p>
+							</div>
 						</div>
-					</div>
 
-					<!-- Version Info -->
-					<div 
-						class="text-xs text-white/50"
-						in:fly={{ y: 5, duration: 300, delay: 1200 }}
-					>
-						Version 1.0.0
-					</div>
-				</div>
-			</div>
-		{/if}
-	</div>
-	
-	<div 
-		class="flex items-center gap-4" 
-		use:clickOutside 
-		on:outclick={handleClickOutside}
-	>
-		<!-- WiFi -->
-		<div class="relative">
-			<button
-				class="flex items-center gap-1 rounded px-1 py-0.5 font-medium text-white hover:bg-slate-700/30 {showWifiMenu ? 'bg-slate-700/30' : ''}"
-				on:click={toggleWifiMenu}
-			>
-				{#if isWifiEnabled}
-					<Wifi class="h-4 w-4" />
-				{:else}
-					<WifiOff class="h-4 w-4" />
-				{/if}
-			</button>
-			
-			{#if showWifiMenu}
-				<div
-					class="{isMobile ? 'fixed inset-x-0 top-7 border-t' : 'absolute right-0 top-7 w-80 rounded-lg border'} 
-						border-slate-700/50 bg-slate-900/95 shadow-lg backdrop-blur"
-					transition:fly={{ 
-						y: isMobile ? -5 : 5,
-						duration: 200,
-						opacity: 0,
-						easing: quintOut 
-					}}
-				>
-					<div class="p-4 {isMobile ? 'space-y-4' : ''}">
-						<div class="mb-4 flex items-center justify-between">
-							<span class="text-sm font-medium text-white">Wi-Fi</span>
-							<label class="relative inline-flex cursor-pointer items-center">
-								<input 
-									type="checkbox" 
-									class="peer sr-only" 
-									checked={isWifiEnabled}
-									on:change={toggleWifi}
-								>
-								<div class="h-6 w-11 rounded-full bg-slate-700 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-700 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none"></div>
-							</label>
-						</div>
-						{#if isWifiEnabled}
-							<div class="{isMobile ? 'grid gap-2' : ''}">
-								<div class="flex items-center justify-between rounded px-2 py-1 hover:bg-slate-700/30">
-									<div class="flex flex-col">
-										<span class="text-sm text-white">SigmaNet (6Ghz)</span>
-										<span class="text-xs text-white/70">Connected</span>
+						<!-- Technologies Section -->
+						<div 
+							class="space-y-2"
+							in:fly={{ y: 10, duration: 300, delay: 700 }}
+						>
+							<h4 class="text-xs font-medium uppercase tracking-wider text-white/50">Built with</h4>
+							<div class="grid grid-cols-2 gap-2">
+								{#each technologies as tech, i}
+									<div 
+										class="flex items-center gap-2 rounded bg-slate-800/50 p-2"
+										in:fly={{ 
+											x: i % 2 === 0 ? -10 : 10, 
+											y: 10,
+											duration: 300, 
+											delay: 800 + (i * 100) 
+										}}
+									>
+										<div class="rounded bg-slate-800/50 p-1.5">
+											<svelte:component 
+												this={tech.icon} 
+												class="h-4 w-4 {tech.color}" 
+											/>
+										</div>
+										<span class="text-sm font-medium text-white">
+											{tech.name}
+										</span>
 									</div>
-									<Wifi class="h-4 w-4 text-white" />
-								</div>
+								{/each}
 							</div>
-						{:else}
-							<div class="text-center text-sm text-white/70">
-								You are offline :(
-							</div>
-						{/if}
-					</div>
-				</div>
-			{/if}
-		</div>
+						</div>
 
-		<!-- Add Contribute button here -->
-		<div class="relative">
-			<button
-				on:click={openContributeWindow}
-				class="flex items-center gap-1 rounded px-1 py-0.5 font-medium text-white hover:bg-slate-700/30"
-			>
-				<Github class="h-4 w-4" />
-			</button>
-		</div>
-
-		<!-- Sound -->
-		<div class="relative">
-			<button
-				class="flex items-center gap-1 rounded px-1 py-0.5 font-medium text-white hover:bg-slate-700/30 {showSoundMenu ? 'bg-slate-700/30' : ''}"
-				on:click={toggleSoundMenu}
-			>
-				<Volume2 class="h-4 w-4" />
-			</button>
-			
-			{#if showSoundMenu}
-				<div
-					class="{isMobile ? 'fixed inset-x-0 top-7 border-t' : 'absolute right-0 top-7 w-80 rounded-lg border'} 
-						border-slate-700/50 bg-slate-900/95 shadow-lg backdrop-blur"
-					transition:fly={{ 
-						y: isMobile ? -5 : 5,
-						duration: 200,
-						opacity: 0,
-						easing: quintOut 
-					}}
-				>
-					<div class="p-4">
-						<div class="space-y-4">
-							<div class="flex items-center justify-between">
-								<span class="text-sm font-medium text-white">Volume</span>
-								<span class="text-sm text-white">{volume}%</span>
-							</div>
-							<input
-								type="range"
-								class="h-2 w-full cursor-pointer appearance-none rounded-lg bg-slate-700"
-								min="0"
-								max="100"
-								value={volume}
-								on:input={handleVolumeChange}
-							>
+						<!-- Version Info -->
+						<div 
+							class="text-xs text-white/50"
+							in:fly={{ y: 5, duration: 300, delay: 1200 }}
+						>
+							Version 1.0.0
 						</div>
 					</div>
 				</div>
 			{/if}
 		</div>
-
-		<!-- Language -->
-		<div class="relative">
-			<button
-				class="flex items-center gap-1 rounded px-1 py-0.5 font-medium text-white hover:bg-slate-700/30 {showLanguageMenu ? 'bg-slate-700/30' : ''}"
-				on:click={toggleLanguageMenu}
-			>
-				<Globe class="h-4 w-4" />
-				<span class="text-xs">{currentLanguage}</span>
-			</button>
-			
-			{#if showLanguageMenu}
-				<div
-					class="absolute right-0 top-7 w-48 rounded-lg border border-slate-700/50 bg-slate-900/95 shadow-lg backdrop-blur"
-					transition:scale={{ duration: 200, start: 0.95, opacity: 0, easing: quintOut }}
+		
+		<div 
+			class="flex items-center gap-4" 
+			use:clickOutside 
+			on:outclick={handleClickOutside}
+		>
+			<!-- WiFi -->
+			<div class="relative">
+				<button
+					class="flex items-center gap-1 rounded px-1 py-0.5 font-medium text-white hover:bg-slate-700/30 {showWifiMenu ? 'bg-slate-700/30' : ''}"
+					on:click={toggleWifiMenu}
 				>
-					<div class="p-1">
-						<button 
-							class="flex w-full items-center rounded px-2 py-1 text-left text-sm text-white hover:bg-slate-700/30"
-							on:click={() => setLanguage('English', 'EN')}
-						>
-							English
-						</button>
-						<button 
-							class="flex w-full items-center rounded px-2 py-1 text-left text-sm text-white hover:bg-slate-700/30"
-							on:click={() => setLanguage('اردو', 'UR')}
-						>
-							اردو
-						</button>
+					{#if isWifiEnabled}
+						<Wifi class="h-4 w-4" />
+					{:else}
+						<WifiOff class="h-4 w-4" />
+					{/if}
+				</button>
+				
+				{#if showWifiMenu}
+					<div
+						class="{isMobile ? 'fixed inset-x-0 top-7 border-t' : 'absolute right-0 top-7 w-80 rounded-lg border'} 
+							border-slate-700/50 bg-slate-900/95 shadow-lg backdrop-blur"
+						transition:fly={{ 
+							y: isMobile ? -5 : 5,
+							duration: 200,
+							opacity: 0,
+							easing: quintOut 
+						}}
+					>
+						<div class="p-4 {isMobile ? 'space-y-4' : ''}">
+							<div class="mb-4 flex items-center justify-between">
+								<span class="text-sm font-medium text-white">Wi-Fi</span>
+								<label class="relative inline-flex cursor-pointer items-center">
+									<input 
+										type="checkbox" 
+										class="peer sr-only" 
+										checked={isWifiEnabled}
+										on:change={toggleWifi}
+									>
+									<div class="h-6 w-11 rounded-full bg-slate-700 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-700 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none"></div>
+								</label>
+							</div>
+							{#if isWifiEnabled}
+								<div class="{isMobile ? 'grid gap-2' : ''}">
+									<div class="flex items-center justify-between rounded px-2 py-1 hover:bg-slate-700/30">
+										<div class="flex flex-col">
+											<span class="text-sm text-white">SigmaNet (6Ghz)</span>
+											<span class="text-xs text-white/70">Connected</span>
+										</div>
+										<Wifi class="h-4 w-4 text-white" />
+									</div>
+								</div>
+							{:else}
+								<div class="text-center text-sm text-white/70">
+									You are offline :(
+								</div>
+							{/if}
+						</div>
 					</div>
-				</div>
-			{/if}
-		</div>
+				{/if}
+			</div>
 
-		<!-- Time -->
-		<div class="flex items-center gap-2">
-			<div class="h-2 w-2 rounded-full bg-green-400"></div>
-			<span class="text-xs text-white">UTC</span>
-			<span class="text-xs text-white">{currentTime}</span>
+			<!-- Add Contribute button here -->
+			<div class="relative">
+				<button
+					on:click={openContributeWindow}
+					class="flex items-center gap-1 rounded px-1 py-0.5 font-medium text-white hover:bg-slate-700/30"
+				>
+					<Github class="h-4 w-4" />
+				</button>
+			</div>
+
+			<!-- Sound -->
+			<div class="relative">
+				<button
+					class="flex items-center gap-1 rounded px-1 py-0.5 font-medium text-white hover:bg-slate-700/30 {showSoundMenu ? 'bg-slate-700/30' : ''}"
+					on:click={toggleSoundMenu}
+				>
+					<Volume2 class="h-4 w-4" />
+				</button>
+				
+				{#if showSoundMenu}
+					<div
+						class="{isMobile ? 'fixed inset-x-0 top-7 border-t' : 'absolute right-0 top-7 w-80 rounded-lg border'} 
+							border-slate-700/50 bg-slate-900/95 shadow-lg backdrop-blur"
+						transition:fly={{ 
+							y: isMobile ? -5 : 5,
+							duration: 200,
+							opacity: 0,
+							easing: quintOut 
+						}}
+					>
+						<div class="p-4">
+							<div class="space-y-4">
+								<div class="flex items-center justify-between">
+									<span class="text-sm font-medium text-white">Volume</span>
+									<span class="text-sm text-white">{volume}%</span>
+								</div>
+								<input
+									type="range"
+									class="h-2 w-full cursor-pointer appearance-none rounded-lg bg-slate-700"
+									min="0"
+									max="100"
+									value={volume}
+									on:input={handleVolumeChange}
+								>
+							</div>
+						</div>
+					</div>
+				{/if}
+			</div>
+
+			<!-- Language -->
+			<div class="relative">
+				<button
+					class="flex items-center gap-1 rounded px-1 py-0.5 font-medium text-white hover:bg-slate-700/30 {showLanguageMenu ? 'bg-slate-700/30' : ''}"
+					on:click={toggleLanguageMenu}
+				>
+					<Globe class="h-4 w-4" />
+					<span class="text-xs">{currentLanguage}</span>
+				</button>
+				
+				{#if showLanguageMenu}
+					<div
+						class="absolute right-0 top-7 w-48 rounded-lg border border-slate-700/50 bg-slate-900/95 shadow-lg backdrop-blur"
+						transition:scale={{ duration: 200, start: 0.95, opacity: 0, easing: quintOut }}
+					>
+						<div class="p-1">
+							<button 
+								class="flex w-full items-center rounded px-2 py-1 text-left text-sm text-white hover:bg-slate-700/30"
+								on:click={() => setLanguage('English', 'EN')}
+							>
+								English
+							</button>
+							<button 
+								class="flex w-full items-center rounded px-2 py-1 text-left text-sm text-white hover:bg-slate-700/30"
+								on:click={() => setLanguage('اردو', 'UR')}
+							>
+								اردو
+							</button>
+						</div>
+					</div>
+				{/if}
+			</div>
+
+			<!-- Time -->
+			<div class="flex items-center gap-2">
+				<div class="h-2 w-2 rounded-full bg-green-400"></div>
+				<span class="text-xs text-white">UTC</span>
+				<span class="text-xs text-white">{currentTime}</span>
+			</div>
 		</div>
 	</div>
 </div>

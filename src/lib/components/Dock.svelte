@@ -5,6 +5,8 @@
 	import { translations } from '$lib/stores/translations';
 	import { content } from '$lib/stores/translations';
 	import { hasPlayedWelcomeAnimation } from '$lib/stores/animation';
+	import { currentTheme } from '$lib/stores/theme';
+	import { settings } from '$lib/stores/settings';
 
 	let isMobile = false;
 	let hasOpenWindows = false;
@@ -49,7 +51,7 @@
 			id: 'about', 
 			icon: User, 
 			title: 'About Me',
-			iconClass: 'text-cyan-400 group-hover:text-cyan-300',
+			iconClass: $currentTheme.dock.about,
 			content: `
 				<link href="https://fonts.googleapis.com/css2?family=Cal+Sans:wght@600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
@@ -57,10 +59,10 @@
 					<div class="space-y-3 relative">
 						<div class="absolute -top-6 -right-4 text-4xl rotate-12 opacity-50">🚀</div>
 						<h2 class="text-3xl font-bold text-white" style="font-family: 'Space Grotesk', sans-serif;">
-							Hi, I'm <span class="text-gradient bg-gradient-to-r from-blue-400 to-cyan-400">Afaan</span>
+							Hi, I'm <span class="text-gradient bg-gradient-to-r ${$currentTheme.gradient.primary}">Afaan</span>
 						</h2>
 						<h3 class="text-xl font-medium" style="font-family: 'Space Grotesk', sans-serif;">
-							A developer from <span class="font-bold bg-gradient-to-r from-green-500 to-emerald-400 bg-clip-text text-transparent animate-pulse">Pakistan</span>
+							A developer from <span class="font-bold bg-gradient-to-r ${$currentTheme.gradient.secondary} bg-clip-text text-transparent animate-pulse">Pakistan</span>
 						</h3>
 						<div class="absolute -left-4 top-12 text-2xl -rotate-12 opacity-50">💻</div>
 					</div>
@@ -380,7 +382,7 @@
 			id: 'projects', 
 			icon: Laptop2, 
 			title: 'Projects',
-			iconClass: 'text-purple-400 group-hover:text-purple-300',
+			iconClass: $currentTheme.dock.projects,
 			content: `
 				<div class="h-full flex flex-col overflow-hidden">
 					<h2 class="text-2xl font-bold text-white p-2" style="font-family: 'Space Grotesk', sans-serif;">
@@ -391,180 +393,180 @@
 					<div class="flex-1 overflow-y-auto px-2">
 						<div class="space-y-4">
 							<!-- All your project cards here -->
-							<!-- Project 1 -->
-							<div class="group rounded-xl border border-blue-500/20 bg-slate-800/50 p-4 hover:bg-slate-800/70 transition-all duration-200">
-								<div class="flex items-start justify-between">
-									<div>
-										<h3 class="text-lg font-semibold text-white">Nexus OS</h3>
-										<p class="text-sm text-blue-400">Personal Project</p>
-									</div>
-									<div class="flex gap-2">
-										<a href="#" class="text-white/60 hover:text-white transition-colors">
-											<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-												<path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.137 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-											</svg>
-										</a>
-										<a href="#" class="text-white/60 hover:text-white transition-colors">
-											<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-											</svg>
-										</a>
-									</div>
+						<!-- Project 1 -->
+						<div class="group rounded-xl border ${$currentTheme.border} ${$currentTheme.bg} p-4 hover:bg-slate-800/70 transition-all duration-200">
+							<div class="flex items-start justify-between">
+								<div>
+									<h3 class="text-lg font-semibold text-white">Nexus OS</h3>
+									<p class="text-sm ${$currentTheme.text.primary}">Personal Project</p>
 								</div>
-								<p class="mt-3 text-sm text-white/80">
-									A modern OS-like portfolio website built with SvelteKit and TailwindCSS. Features window management, dock animations, and system-like UI components.
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">TypeScript</span>
-									<span class="rounded-full bg-orange-500/10 px-3 py-1 text-xs font-medium text-orange-400">SvelteKit</span>
-									<span class="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-400">TailwindCSS</span>
+								<div class="flex gap-2">
+									<a href="#" class="${$currentTheme.text.link} ${$currentTheme.text.linkHover} transition-colors">
+										<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+											<path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.137 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+										</svg>
+									</a>
+									<a href="#" class="${$currentTheme.text.link} ${$currentTheme.text.linkHover} transition-colors">
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+										</svg>
+									</a>
 								</div>
 							</div>
+							<p class="mt-3 text-sm text-white/80">
+								A modern OS-like portfolio website built with SvelteKit and TailwindCSS. Features window management, dock animations, and system-like UI components.
+							</p>
+							<div class="mt-4 flex flex-wrap gap-2">
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">TypeScript</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">SvelteKit</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">TailwindCSS</span>
+							</div>
+						</div>
 
-							<!-- ForgeWEB Project (moved up) -->
-							<div class="group rounded-xl border border-blue-500/20 bg-slate-800/50 p-4 hover:bg-slate-800/70 transition-all duration-200">
-								<div class="flex items-start justify-between">
-									<div>
-										<h3 class="text-lg font-semibold text-white">ForgeWEB</h3>
-										<p class="text-sm text-indigo-400">Personal Website</p>
-									</div>
-									<div class="flex gap-2">
-										<a href="https://forgeweb.uk" target="_blank" class="text-white/60 hover:text-white transition-colors">
-											<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-											</svg>
-										</a>
-									</div>
+						<!-- ForgeWEB Project (moved up) -->
+						<div class="group rounded-xl border ${$currentTheme.border} ${$currentTheme.bg} p-4 hover:bg-slate-800/70 transition-all duration-200">
+							<div class="flex items-start justify-between">
+								<div>
+									<h3 class="text-lg font-semibold text-white">ForgeWEB</h3>
+									<p class="text-sm ${$currentTheme.text.primary}">Personal Website</p>
 								</div>
-								<p class="mt-3 text-sm text-white/80">
-									My personal web development website showcasing services, portfolio, and web development expertise.
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">React</span>
-									<span class="rounded-full bg-orange-500/10 px-3 py-1 text-xs font-medium text-orange-400">HTML/CSS</span>
-									<span class="rounded-full bg-yellow-500/10 px-3 py-1 text-xs font-medium text-yellow-400">JavaScript</span>
+								<div class="flex gap-2">
+									<a href="https://forgeweb.uk" target="_blank" class="${$currentTheme.text.link} ${$currentTheme.text.linkHover} transition-colors">
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+										</svg>
+									</a>
 								</div>
 							</div>
+							<p class="mt-3 text-sm text-white/80">
+								My personal web development website showcasing services, portfolio, and web development expertise.
+							</p>
+							<div class="mt-4 flex flex-wrap gap-2">
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">React</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">HTML/CSS</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">JavaScript</span>
+							</div>
+						</div>
 
-							<!-- Project 2 -->
-							<div class="group rounded-xl border border-blue-500/20 bg-slate-800/50 p-4 hover:bg-slate-800/70 transition-all duration-200">
-								<div class="flex items-start justify-between">
-									<div>
-										<h3 class="text-lg font-semibold text-white">TaskFlow Hub</h3>
-										<p class="text-sm text-green-400">Backend Project</p>
-									</div>
-									<div class="flex gap-2">
-										<a href="#" class="text-white/60 hover:text-white transition-colors">
-											<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-												<path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.137 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-											</svg>
-										</a>
-									</div>
+						<!-- Project 2 -->
+						<div class="group rounded-xl border ${$currentTheme.border} ${$currentTheme.bg} p-4 hover:bg-slate-800/70 transition-all duration-200">
+							<div class="flex items-start justify-between">
+								<div>
+									<h3 class="text-lg font-semibold text-white">TaskFlow Hub</h3>
+									<p class="text-sm ${$currentTheme.text.primary}">Backend Project</p>
 								</div>
-								<p class="mt-3 text-sm text-white/80">
-									RESTful API for task management with authentication, task scheduling, and team collaboration features.
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">Node.js</span>
-									<span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">TypeScript</span>
-									<span class="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">MongoDB</span>
+								<div class="flex gap-2">
+									<a href="#" class="${$currentTheme.text.link} ${$currentTheme.text.linkHover} transition-colors">
+										<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+											<path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.137 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+										</svg>
+									</a>
 								</div>
 							</div>
+							<p class="mt-3 text-sm text-white/80">
+								RESTful API for task management with authentication, task scheduling, and team collaboration features.
+							</p>
+							<div class="mt-4 flex flex-wrap gap-2">
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">Node.js</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">TypeScript</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">MongoDB</span>
+							</div>
+						</div>
 
-							<!-- Project 3 -->
-							<div class="group rounded-xl border border-blue-500/20 bg-slate-800/50 p-4 hover:bg-slate-800/70 transition-all duration-200">
-								<div class="flex items-start justify-between">
-									<div>
-										<h3 class="text-lg font-semibold text-white">PixelMart</h3>
-										<p class="text-sm text-purple-400">Full Stack Project</p>
-									</div>
-									<div class="flex gap-2">
-										<a href="#" class="text-white/60 hover:text-white transition-colors">
-											<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-												<path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.137 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-											</svg>
-										</a>
-									</div>
+						<!-- Project 3 -->
+						<div class="group rounded-xl border ${$currentTheme.border} ${$currentTheme.bg} p-4 hover:bg-slate-800/70 transition-all duration-200">
+							<div class="flex items-start justify-between">
+								<div>
+									<h3 class="text-lg font-semibold text-white">PixelMart</h3>
+									<p class="text-sm ${$currentTheme.text.primary}">Full Stack Project</p>
 								</div>
-								<p class="mt-3 text-sm text-white/80">
-									Modern e-commerce platform with real-time inventory, payment processing, and admin dashboard.
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">TypeScript</span>
-									<span class="rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-400">PHP</span>
-									<span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">MySQL</span>
+								<div class="flex gap-2">
+									<a href="#" class="${$currentTheme.text.link} ${$currentTheme.text.linkHover} transition-colors">
+										<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+											<path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.137 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+										</svg>
+									</a>
 								</div>
 							</div>
+							<p class="mt-3 text-sm text-white/80">
+								Modern e-commerce platform with real-time inventory, payment processing, and admin dashboard.
+							</p>
+							<div class="mt-4 flex flex-wrap gap-2">
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">TypeScript</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">PHP</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">MySQL</span>
+							</div>
+						</div>
 
-							<!-- Project 4 -->
-							<div class="group rounded-xl border border-blue-500/20 bg-slate-800/50 p-4 hover:bg-slate-800/70 transition-all duration-200">
-								<div class="flex items-start justify-between">
-									<div>
-										<h3 class="text-lg font-semibold text-white">CloudForge CI</h3>
-										<p class="text-sm text-cyan-400">Infrastructure Project</p>
-									</div>
-								</div>
-								<p class="mt-3 text-sm text-white/80">
-									Automated CI/CD pipeline with containerization, load balancing, and monitoring setup.
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">Docker</span>
-									<span class="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">Nginx</span>
-									<span class="rounded-full bg-slate-500/10 px-3 py-1 text-xs font-medium text-slate-400">GitHub Actions</span>
+						<!-- Project 4 -->
+						<div class="group rounded-xl border ${$currentTheme.border} ${$currentTheme.bg} p-4 hover:bg-slate-800/70 transition-all duration-200">
+							<div class="flex items-start justify-between">
+								<div>
+									<h3 class="text-lg font-semibold text-white">CloudForge CI</h3>
+									<p class="text-sm ${$currentTheme.text.primary}">Infrastructure Project</p>
 								</div>
 							</div>
+							<p class="mt-3 text-sm text-white/80">
+								Automated CI/CD pipeline with containerization, load balancing, and monitoring setup.
+							</p>
+							<div class="mt-4 flex flex-wrap gap-2">
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">Docker</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">Nginx</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">GitHub Actions</span>
+							</div>
+						</div>
 
-							<!-- Project 5 -->
-							<div class="group rounded-xl border border-blue-500/20 bg-slate-800/50 p-4 hover:bg-slate-800/70 transition-all duration-200">
-								<div class="flex items-start justify-between">
-									<div>
-										<h3 class="text-lg font-semibold text-white">ChatterSync</h3>
-										<p class="text-sm text-emerald-400">Web Application</p>
-									</div>
-								</div>
-								<p class="mt-3 text-sm text-white/80">
-									Real-time messaging application with rooms, file sharing, and user presence indicators.
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-yellow-500/10 px-3 py-1 text-xs font-medium text-yellow-400">JavaScript</span>
-									<span class="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">Node.js</span>
-									<span class="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">MongoDB</span>
+						<!-- Project 5 -->
+						<div class="group rounded-xl border ${$currentTheme.border} ${$currentTheme.bg} p-4 hover:bg-slate-800/70 transition-all duration-200">
+							<div class="flex items-start justify-between">
+								<div>
+									<h3 class="text-lg font-semibold text-white">ChatterSync</h3>
+									<p class="text-sm ${$currentTheme.text.primary}">Web Application</p>
 								</div>
 							</div>
+							<p class="mt-3 text-sm text-white/80">
+								Real-time messaging application with rooms, file sharing, and user presence indicators.
+							</p>
+							<div class="mt-4 flex flex-wrap gap-2">
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">JavaScript</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">Node.js</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">MongoDB</span>
+							</div>
+						</div>
 
-							<!-- Project 6 -->
-							<div class="group rounded-xl border border-blue-500/20 bg-slate-800/50 p-4 hover:bg-slate-800/70 transition-all duration-200">
-								<div class="flex items-start justify-between">
-									<div>
-										<h3 class="text-lg font-semibold text-white">ContentFlow CMS</h3>
-										<p class="text-sm text-orange-400">Backend Project</p>
-									</div>
-								</div>
-								<p class="mt-3 text-sm text-white/80">
-									Headless CMS with API endpoints, media management, and user roles/permissions.
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-400">PHP</span>
-									<span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">MySQL</span>
-									<span class="rounded-full bg-orange-500/10 px-3 py-1 text-xs font-medium text-orange-400">HTML/CSS</span>
+						<!-- Project 6 -->
+						<div class="group rounded-xl border ${$currentTheme.border} ${$currentTheme.bg} p-4 hover:bg-slate-800/70 transition-all duration-200">
+							<div class="flex items-start justify-between">
+								<div>
+									<h3 class="text-lg font-semibold text-white">ContentFlow CMS</h3>
+									<p class="text-sm ${$currentTheme.text.primary}">Backend Project</p>
 								</div>
 							</div>
+							<p class="mt-3 text-sm text-white/80">
+								Headless CMS with API endpoints, media management, and user roles/permissions.
+							</p>
+							<div class="mt-4 flex flex-wrap gap-2">
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">PHP</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">MySQL</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">HTML/CSS</span>
+							</div>
+						</div>
 
-							<!-- Project 7 -->
-							<div class="group rounded-xl border border-blue-500/20 bg-slate-800/50 p-4 hover:bg-slate-800/70 transition-all duration-200">
-								<div class="flex items-start justify-between">
-									<div>
-										<h3 class="text-lg font-semibold text-white">SkyPulse</h3>
-										<p class="text-sm text-blue-400">Frontend Project</p>
-									</div>
+						<!-- Project 7 -->
+						<div class="group rounded-xl border ${$currentTheme.border} ${$currentTheme.bg} p-4 hover:bg-slate-800/70 transition-all duration-200">
+							<div class="flex items-start justify-between">
+								<div>
+									<h3 class="text-lg font-semibold text-white">SkyPulse</h3>
+									<p class="text-sm ${$currentTheme.text.primary}">Frontend Project</p>
 								</div>
-								<p class="mt-3 text-sm text-white/80">
-									Interactive weather dashboard with location tracking, forecasts, and weather alerts.
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">TypeScript</span>
-									<span class="rounded-full bg-orange-500/10 px-3 py-1 text-xs font-medium text-orange-400">HTML/CSS</span>
-									<span class="rounded-full bg-yellow-500/10 px-3 py-1 text-xs font-medium text-yellow-400">JavaScript</span>
+							</div>
+							<p class="mt-3 text-sm text-white/80">
+								Interactive weather dashboard with location tracking, forecasts, and weather alerts.
+							</p>
+							<div class="mt-4 flex flex-wrap gap-2">
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">TypeScript</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">HTML/CSS</span>
+								<span class="rounded-full ${$currentTheme.highlight} px-3 py-1 text-xs font-medium ${$currentTheme.text.primary}">JavaScript</span>
 								</div>
 							</div>
 						</div>
@@ -611,7 +613,7 @@
 			id: 'terminal', 
 			icon: Terminal, 
 			title: 'Terminal',
-			iconClass: 'text-violet-400 group-hover:text-violet-300',
+			iconClass: $currentTheme.dock.terminal,
 			content: `
 				<div class="font-mono text-sm">
 					<div class="mb-4 space-y-1">
@@ -863,8 +865,8 @@
 		{ 
 			id: 'contact', 
 			icon: Mail, 
-			title: 'Contact Me',
-			iconClass: 'text-indigo-400 group-hover:text-indigo-300',
+			title: 'Contact',
+			iconClass: $currentTheme.dock.contact,
 			content: `
 				<div class="space-y-6 p-2">
 					<style>
@@ -968,68 +970,30 @@
 	// Get chunked apps for mobile grid view
 	$: appRows = isMobile ? chunkArray(apps, 3) : [apps];
 
-	function handleAppClick(app: typeof apps[number]) {
-		if (isAnimating) return; // Prevent clicks during animation
-		
-		// Check if there's a minimized window for this app
-		let existingWindow = $windows.find(w => w.id.startsWith(app.id) && w.isMinimized);
-		
-		if (existingWindow) {
-			// If there's a minimized window, restore it
-			windows.minimize(existingWindow.id); // This will toggle isMinimized back to false
-			windows.setActive(existingWindow.id);
-		} else {
-			// Only create a new window if there isn't a minimized one
-			let windowContent = app.content;
-			
-			// Update content based on language
-			if ($translations === 'UR') {
-				windowContent = windowContent
-					// About section
-					.replace(/About Me/g, content.UR.about.title)
-					.replace(/Hi, I'm/g, content.UR.about.greeting)
-					.replace(/A developer from/g, content.UR.about.subtitle)
-					.replace(/Available for work/g, content.UR.about.status[0])
-					.replace(/Open to collaborate/g, content.UR.about.status[1])
-					.replace(/Languages/g, content.UR.about.skills.languages)
-					.replace(/Databases/g, content.UR.about.skills.databases)
-					.replace(/Tools/g, content.UR.about.skills.tools)
-					.replace(/Beginner/g, content.UR.about.skills.levels.beginner)
-					.replace(/Intermediate/g, content.UR.about.skills.levels.intermediate)
-					.replace(/Advanced/g, content.UR.about.skills.levels.advanced)
-					.replace(/Master/g, content.UR.about.skills.levels.master)
-					
-					// Projects section
-					.replace(/My Projects/g, content.UR.projects.title)
-					.replace(/Personal Project/g, content.UR.projects.projectTypes.personal)
-					.replace(/Backend Project/g, content.UR.projects.projectTypes.backend)
-					.replace(/Frontend Project/g, content.UR.projects.projectTypes.frontend)
-					.replace(/Full Stack Project/g, content.UR.projects.projectTypes.fullstack)
-					.replace(/Infrastructure Project/g, content.UR.projects.projectTypes.infrastructure)
-					.replace(/View on GitHub/g, content.UR.projects.viewGithub)
-					.replace(/Visit Site/g, content.UR.projects.visitSite)
-					
-					// Terminal section
-					.replace(/Type 'help' to see available commands/g, content.UR.terminal.welcome)
-					.replace(/guest@nexus/g, content.UR.terminal.prompt)
-					
-					// Contact section
-					.replace(/Let's Connect!/g, content.UR.contact.title)
-					.replace(/Choose your preferred way to reach out/g, content.UR.contact.subtitle)
-					.replace(/Send an email/g, content.UR.contact.email.action)
-					.replace(/Message on Discord/g, content.UR.contact.discord.action)
-					.replace(/Visit Website/g, content.UR.contact.website.action)
-					.replace(/Email: < 24h/g, content.UR.contact.email.response)
-					.replace(/Discord: < 12h/g, content.UR.contact.discord.response);
-			}
+	function handleAppClick(app: any) {
+		// Find any existing window for this app
+		const existingWindow = $windows.find(w => w.id.startsWith(app.id));
 
-			windows.add({
-				id: `${app.id}-${Date.now()}`,
-				title: app.title,
-				icon: app.id,
-				content: windowContent,
-				isMaximized: false
-			});
+		if (existingWindow) {
+			// If window exists and is minimized, restore it
+			if (existingWindow.isMinimized) {
+				windows.minimize(existingWindow.id); // This will un-minimize it
+				windows.setActive(existingWindow.id);
+			} 
+			// If window exists and is not minimized, minimize it
+			else {
+				windows.minimize(existingWindow.id);
+			}
+		} else {
+			// If no window exists, create a new one
+			const windowContent = app.content;
+		windows.add({
+			id: `${app.id}-${Date.now()}`,
+			title: app.title,
+			icon: app.id,
+			content: windowContent,
+			isMaximized: false
+		});
 		}
 	}
 
@@ -1095,6 +1059,28 @@
 			}, 5000);
 		}
 	});
+
+	$: dockSize = {
+		small: { button: 'h-12 w-12', icon: 'h-6 w-6' },
+		medium: { button: 'h-14 w-14', icon: 'h-7 w-7' },
+		large: { button: 'h-16 w-16', icon: 'h-8 w-8' }
+	}[$settings.dockSize];
+
+	$: dockPosition = {
+		bottom: 'bottom-5 left-1/2 -translate-x-1/2 flex-row',
+		left: 'left-5 top-1/2 -translate-y-1/2 flex-col',
+		right: 'right-5 top-1/2 -translate-y-1/2 flex-col'
+	}[$settings.dockPosition];
+
+	$: dockPadding = {
+		bottom: 'p-3',
+		left: 'p-3',
+		right: 'p-3'
+	}[$settings.dockPosition];
+
+	$: isVertical = $settings.dockPosition === 'left' || $settings.dockPosition === 'right';
+
+	$: dockOpacity = (100 - $settings.windowTransparency) / 100;
 </script>
 
 {#if isMobile && shouldShowWarning}
@@ -1196,41 +1182,45 @@
 
 {#if !isMobile || (!hasOpenWindows && !$windows.some(w => w.id.startsWith(app.id)))}
 <div 
-	class="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-2xl bg-slate-900/70 {isMobile ? 'p-8' : 'p-3'} backdrop-blur supports-[backdrop-filter]:bg-slate-900/40 border border-slate-700/20 
+	class="fixed z-50 rounded-2xl backdrop-blur border {$currentTheme.border} {dockPosition} {dockPadding}
 	{!$hasPlayedWelcomeAnimation && isBooted ? 'dock-reveal' : $hasPlayedWelcomeAnimation ? '' : 'opacity-0 translate-y-20'} 
 	{isAnimating ? 'animation-in-progress' : ''}"
+	style="background-color: rgba(15, 23, 42, {dockOpacity})"
 	on:mouseleave={handleMouseLeave}
 >
-	<div class="{isMobile ? 'grid grid-cols-2 sm:grid-cols-3 gap-8' : 'flex gap-3'}">
+	<div class="{isVertical ? 'flex flex-col gap-3' : 'flex flex-row gap-3'}">
 		{#each isMobile ? apps : apps as app, index (app.id)}
 			<div 
-				class="flex flex-col items-center {!$hasPlayedWelcomeAnimation && isBooted ? 'dock-item-reveal' : ''}"
+				class="flex {isVertical ? 'flex-col' : 'flex-col items-center'} {!$hasPlayedWelcomeAnimation && isBooted ? 'dock-item-reveal' : ''}"
 				style={!$hasPlayedWelcomeAnimation ? `animation-delay: ${1000 + (index * 100)}ms` : ''}
 			>
 				<button
 					data-app-id={app.id}
-					class="dock-icon group relative flex {isMobile ? 'h-[55px] w-[55px] sm:h-[65px] sm:w-[65px]' : 'h-14 w-14'} items-center justify-center rounded-xl bg-slate-800/50 transition-all duration-75 hover:bg-slate-800/80 {$activeWindowsByApp.has(app.id) ? 'ring-2 ring-blue-500/30 shadow-lg shadow-blue-500/20' : ''}"
+					class="dock-icon group relative flex {dockSize.button} items-center justify-center rounded-xl {$currentTheme.bg} transition-all duration-75 hover:bg-slate-800/80 {$activeWindowsByApp.has(app.id) ? $currentTheme.accent : ''}"
 					on:click={() => handleAppClick(app)}
 					on:mousemove={(e) => handleMouseMove(e, index)}
+					style={!$hasPlayedWelcomeAnimation ? `animation-delay: ${1000 + (index * 100)}ms` : ''}
 				>
 					<div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 to-white/0"></div>
-					<!-- Icon wrapper to prevent blur -->
 					<div class="icon-wrapper flex items-center justify-center">
 						<svelte:component 
 							this={app.icon} 
-							class="{isMobile ? 'h-8 w-8' : 'h-7 w-7'} transition-inherit {app.iconClass}" 
+							class="{dockSize.icon} transition-inherit {app.iconClass}" 
 							strokeWidth={1.5} 
 						/>
 					</div>
 					<div 
-						class="pointer-events-none absolute {getLabelPosition(index)} rounded-lg bg-slate-800/90 px-4 py-2 text-sm font-medium text-white opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 translate-y-1 border border-slate-700/50 z-10"
+						class="pointer-events-none absolute {isVertical ? ($settings.dockPosition === 'right' ? 'right-full mr-2' : 'left-full ml-2') : 'bottom-full mb-2'} rounded-lg bg-slate-800/90 px-4 py-2 text-sm font-medium text-white opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 translate-y-1 border border-slate-700/50 z-10"
 					>
 						{app.title}
 					</div>
 				</button>
 				
 				{#if $activeWindowsByApp.has(app.id)}
-					<div class="mt-3 h-1.5 w-1.5 rounded-full bg-blue-400/70 shadow-lg shadow-blue-400/20"></div>
+					<div class="{
+						$settings.dockPosition === 'bottom' ? 'mt-3' : 
+						isVertical ? 'mt-2 self-center' : ''
+					} h-1.5 w-1.5 rounded-full bg-blue-400/70 shadow-lg shadow-blue-400/20"></div>
 				{/if}
 			</div>
 		{/each}

@@ -7,6 +7,8 @@
 	import { Maximize2, Minus, X } from 'lucide-svelte';
 	import { onDestroy } from 'svelte';
 	import { WINDOW_WIDTH, WINDOW_HEIGHT, STATUS_BAR_HEIGHT, MARGIN } from '$lib/utils/windowPosition';
+	import { currentTheme } from '$lib/stores/theme';
+	import { settings, getAnimationDuration } from '$lib/stores/settings';
 
 	// Add isMobile state
 	let isMobile = false;
@@ -192,6 +194,12 @@
 			cancelAnimationFrame(animationFrameId);
 		}
 	});
+
+	// Calculate opacity based on transparency setting (inverted since higher transparency = lower opacity)
+	$: windowOpacity = (100 - $settings.windowTransparency) / 100;
+
+	// Get animation duration based on settings
+	$: animationDuration = getAnimationDuration($settings.animationSpeed);
 </script>
 
 <svelte:window 
@@ -204,23 +212,23 @@
 {#if !isMinimized && !isClosing}
 	<div
 		bind:this={windowRef}
-		class="absolute flex flex-col rounded-xl border border-blue-500/20 bg-slate-900/85 shadow-lg backdrop-blur-md {isGlowing ? 'window-glow' : ''} 
+		class="absolute flex flex-col rounded-xl {$currentTheme.secondary} backdrop-blur border {$currentTheme.border} shadow-lg {isGlowing ? 'window-glow' : ''} 
 			{isMobile || isMaximized ? 'fixed w-full h-full rounded-none safe-area-inset' : 'w-[380px] h-[500px]'}
 			{isDragging ? 'cursor-grabbing will-change-transform' : 'cursor-grab'}
 			{isOpening ? 'scale-up' : ''}"
-		style="{windowStyle}"
+		style="{windowStyle}; background-color: rgba(15, 23, 42, {windowOpacity}); transition-duration: {animationDuration}s"
 		on:mousedown={handleWindowClick}
 		role="dialog"
 		aria-labelledby="window-title"
 		in:scale={{
-			duration: openAnimationDuration,
+			duration: openAnimationDuration * animationDuration,
 			delay: 0,
 			opacity: 0,
 			start: 0.8,
 			easing: backOut
 		}}
 		out:scale={{
-			duration: closeAnimationDuration,
+			duration: closeAnimationDuration * animationDuration,
 			opacity: 0,
 			start: 1,
 			end: 0.95,
@@ -277,11 +285,10 @@
 
 		<!-- Window Content -->
 		<div 
-			class="flex-1 overflow-y-auto overflow-x-hidden {isMobile ? 'p-5 sm:p-4' : 'p-4'} prose prose-invert relative"
+			class="flex-1 overflow-y-auto overflow-x-hidden {isMobile ? 'p-5 sm:p-4' : 'p-4'} relative"
 			in:fly={{ y: 40, duration: 500, delay: 100, easing: backOut }}
 			out:fly={{ y: 20, duration: 250, easing: quintOut }}
 		>
-			<div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none"></div>
 			<slot></slot>
 		</div>
 	</div>

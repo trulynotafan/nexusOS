@@ -6,10 +6,18 @@
 	import StatusBar from '$lib/components/StatusBar.svelte';
 	import BootScreen from '$lib/components/BootScreen.svelte';
 	import { windows } from '$lib/stores/windows';
+	import ContextMenu from '$lib/components/ContextMenu.svelte';
+	import { currentWallpaper } from '$lib/stores/wallpaper';
+	import { currentTheme } from '$lib/stores/theme';
 
 	let isMobile = false;
 	let isBootComplete = false;
 	let dockComponent: any;
+	let contextMenu = {
+		show: false,
+		x: 0,
+		y: 0
+	};
 
 	onMount(() => {
 		checkMobile();
@@ -43,14 +51,36 @@
 			dockComponent.startAnimation();
 		}
 	}
+
+	function handleContextMenu(event: MouseEvent) {
+		event.preventDefault();
+		// Don't show context menu if clicking on a window or dock
+		if ((event.target as HTMLElement).closest('[role="dialog"]') || 
+			(event.target as HTMLElement).closest('.dock')) {
+			return;
+		}
+		contextMenu = {
+			show: true,
+			x: event.clientX,
+			y: event.clientY
+		};
+	}
+
+	function handleClick() {
+		contextMenu.show = false;
+	}
 </script>
 
-<div class="relative h-screen w-screen overflow-hidden">
+<div 
+	class="relative h-screen w-screen overflow-hidden"
+	on:contextmenu={handleContextMenu}
+	on:click={handleClick}
+>
 	<!-- Wallpaper -->
-	<div class="absolute inset-0 bg-gradient-to-br from-blue-950 to-slate-950">
+	<div class="absolute inset-0 bg-gradient-to-br {$currentTheme.primary}">
 		<div 
 			class="absolute inset-0 bg-cover bg-center opacity-50"
-			style="background-image: url('/images/wallpaper.jpeg')"
+			style="background-image: url('{$currentWallpaper}')"
 		></div>
 		<div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
 	</div>
@@ -77,4 +107,10 @@
 	</div>
 
 	<Dock bind:this={dockComponent} />
+
+	<ContextMenu 
+		show={contextMenu.show}
+		x={contextMenu.x}
+		y={contextMenu.y}
+	/>
 </div>
