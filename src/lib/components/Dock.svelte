@@ -1149,12 +1149,55 @@
     .animate-scaleIn {
         animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
+
+    @keyframes dock-reveal {
+        0% {
+            transform: translate(-50%, 80px);
+            opacity: 0;
+        }
+        100% {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes dock-item-reveal {
+        0% {
+            transform: translateY(40px) scale(0.8);
+            opacity: 0;
+            filter: blur(2px);
+        }
+        60% {
+            transform: translateY(-10px) scale(1.1);
+            opacity: 0.8;
+            filter: blur(0px);
+        }
+        80% {
+            transform: translateY(5px) scale(0.95);
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    .dock-reveal {
+        animation: dock-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        perspective: 1000px;
+    }
+
+    .dock-item-reveal {
+        animation: dock-item-reveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        will-change: transform, opacity, filter;
+        transform-origin: bottom;
+    }
 </style>
 
 {#if !isMobile || (!hasOpenWindows && !$windows.some(w => w.id.startsWith(app.id)))}
 <div 
 	class="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-2xl bg-slate-900/70 {isMobile ? 'p-8' : 'p-3'} backdrop-blur supports-[backdrop-filter]:bg-slate-900/40 border border-slate-700/20 
-	{!$hasPlayedWelcomeAnimation ? (isBooted ? 'dock-reveal' : 'opacity-0 translate-y-20') : ''} 
+	{!$hasPlayedWelcomeAnimation && isBooted ? 'dock-reveal' : $hasPlayedWelcomeAnimation ? '' : 'opacity-0 translate-y-20'} 
 	{isAnimating ? 'animation-in-progress' : ''}"
 	on:mouseleave={handleMouseLeave}
 >
