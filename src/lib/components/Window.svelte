@@ -285,7 +285,7 @@
 
 		<!-- Window Content -->
 		<div 
-			class="flex-1 overflow-y-auto overflow-x-hidden {isMobile ? 'p-5 sm:p-4' : 'p-4'} relative"
+			class="flex-1 overflow-y-auto overflow-x-hidden window-content {isMobile ? 'p-5 sm:p-4' : 'p-4'} relative"
 			in:fly={{ y: 40, duration: 500, delay: 100, easing: backOut }}
 			out:fly={{ y: 20, duration: 250, easing: quintOut }}
 		>
@@ -325,23 +325,22 @@
 		opacity: 0.2;
 	}
 
-	/* Scrollbar styling */
-	.prose {
+	/* Move scrollbar styling to Window component and update selectors */
+	:global(.window-content) {
 		scrollbar-width: thin;
 		scrollbar-color: rgba(59, 130, 246, 0.3) transparent;
 	}
-	.prose::-webkit-scrollbar {
+	:global(.window-content::-webkit-scrollbar) {
 		width: 6px;
 	}
-	.prose::-webkit-scrollbar-track {
+	:global(.window-content::-webkit-scrollbar-track) {
 		background: transparent;
 	}
-	.prose::-webkit-scrollbar-thumb {
+	:global(.window-content::-webkit-scrollbar-thumb) {
 		background-color: rgba(59, 130, 246, 0.3);
 		border-radius: 3px;
-		transition: background-color 0.2s;
 	}
-	.prose::-webkit-scrollbar-thumb:hover {
+	:global(.window-content::-webkit-scrollbar-thumb:hover) {
 		background-color: rgba(59, 130, 246, 0.5);
 	}
 
