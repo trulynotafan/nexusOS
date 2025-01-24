@@ -10,7 +10,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"generate-hash": "node --loader ts-node/esm scripts/generate-password-hash.ts"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -20,6 +21,7 @@
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@tailwindcss/forms": "^0.5.10",
 		"@tailwindcss/typography": "^0.5.16",
+		"@types/bcryptjs": "^2.4.6",
 		"autoprefixer": "^10.4.20",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
@@ -31,11 +33,13 @@
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^3.4.17",
+		"ts-node": "^10.9.2",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.20.0",
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
+		"bcryptjs": "^2.4.3",
 		"lucide-svelte": "^0.473.0",
 		"svelte-motion": "^0.12.2"
 	}

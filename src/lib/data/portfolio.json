@@ -1,0 +1,22 @@
+{
+    "skills": [
+        {
+            "id": "javascript",
+            "name": "JavaScript",
+            "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+            "level": "Intermediate",
+            "category": "Languages"
+        }
+    ],
+    "projects": [
+        {
+            "id": "nexus-os",
+            "title": "Nexus OS",
+            "description": "A modern OS-like portfolio website built with SvelteKit and TailwindCSS.",
+            "type": "Personal Project",
+            "githubUrl": "https://github.com/yourusername/nexus-os",
+            "liveUrl": "https://your-site.com",
+            "technologies": ["TypeScript", "SvelteKit", "TailwindCSS"]
+        }
+    ]
+} 

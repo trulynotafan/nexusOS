@@ -5,6 +5,9 @@
     import { currentTheme } from '$lib/stores/theme';
     import { fade } from 'svelte/transition';
     import { settings } from '$lib/stores/settings';
+    import AdminPanel from '$lib/components/AdminPanel.svelte';
+    import { isAuthenticated } from '$lib/stores/auth';
+    import LoginModal from './LoginModal.svelte';
     
     export let x = 0;
     export let y = 0;
@@ -194,8 +197,32 @@
                     isMaximized: false
                 });
             }
+        },
+        {
+            id: 'admin',
+            label: 'Admin Panel',
+            icon: Settings,
+            action: handleAdminClick
         }
     ];
+
+    let showLoginModal = false;
+
+    function handleAdminClick() {
+        if ($isAuthenticated) {
+            // Open admin panel
+            windows.add({
+                id: `admin-${Date.now()}`,
+                title: 'Admin Panel',
+                icon: 'settings',
+                content: AdminPanel,
+                isMaximized: false
+            });
+        } else {
+            showLoginModal = true;
+        }
+        show = false;
+    }
 
     function handleClick(action: () => void) {
         action();
@@ -229,4 +256,10 @@
             </div>
         </div>
     </div>
+{/if}
+
+{#if showLoginModal}
+    <LoginModal 
+        on:close={() => showLoginModal = false} 
+    />
 {/if} 
