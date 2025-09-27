@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+    <style>
+        .hexagon { stroke: #60A5FA; }
+        .command { stroke: #ffffff; }
+        @media (prefers-color-scheme: dark) {
+            .hexagon { stroke: #93C5FD; }
+            .command { stroke: #ffffff; }
+        }
+    </style>
+    <!-- Hexagon -->
+    <path class="hexagon" d="M21 16.5v-9L12 3L3 7.5v9L12 21l9-4.5z" stroke-width="1.5" fill="none"/>
+    <!-- Command symbol -->
+    <path class="command" d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg> 

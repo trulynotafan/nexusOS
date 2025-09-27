@@ -1,0 +1,32 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+@keyframes matrix {
+	0% {
+		filter: hue-rotate(0deg);
+	}
+	100% {
+		filter: hue-rotate(360deg);
+	}
+}
+
+.matrix-mode * {
+	animation: matrix 2s linear infinite;
+}
+
+.glass-morphism {
+	@apply bg-purple-950/80 backdrop-blur supports-[backdrop-filter]:bg-purple-950/50;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+:root {
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+}
+
+.font-futuristic {
+	letter-spacing: 0.02em;
+	font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+}
